@@ -13,7 +13,6 @@ def censorBySales(demand, order):
         observedDemand.append(min(i, order))
     return observedDemand
 
-
 ## Models
 
 def myopicNewsvendor(price, cost, demand, w = 10000): 
@@ -415,21 +414,6 @@ def generateBetaDemand(mean, std, n):
     return l
 
 
-# Cummulative Profit
-
-demandC = generateNormDemand(100, 30, 1100) + generateNormDemand(50, 30, 1000)
-
-price = 1
-cost = 0.5
-demand = demandC
-op = optimalNewsvendor(price, cost, demand[100:], 100, 30)
-my = myopicNewsvendor(price, cost, demand)
-mle = MLE(price, cost, demand)
-mle50 = MLE(price, cost, demand, 50)
-dcl = dualCensoredLearning(price, cost, demand)
-ai = adaptiveIncrement(price, cost, demand)
-plotProfits(op, my, mle,mle50, dcl, ai)
-
 
 # Scenario A - Stationary Demand
 
@@ -633,7 +617,6 @@ def saveProfitWindow(price, cost, demand, title, op):
                columns =['day', 'd', 'op', 'mle', 'mle20', 'mle30', 'mle50', 'mle100', 'mle150', 'mle200', 'mle300', 'mle500']).to_csv("data/" + title + ".csv", index = False)
 
 
-
 op = optimalF(1, 0.5, demandF[100:])
 saveProfitWindow(1, 0.5, demandF, 'G_0.5', op)
 
@@ -646,7 +629,6 @@ saveProfitWindow(1, 0.7, demandF, 'G_0.3', op)
 # Kfold 
 
 plotkFoldCV(1, 0.5, generateNormDemand(100, 30, 110), 10)
-
 
 # Sensitivity Analysis
 
